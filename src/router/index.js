@@ -60,6 +60,30 @@ export const constantRouterMap = [
   },
 
   {
+    path: '/tools',
+    component: Layout,
+    meta: {
+      roles: ['admin', 'editor'],
+      title: '常用功能',
+      icon: 'table'
+    },
+    children: [
+      {
+        path: 'sitecache',
+        component: () => import('@/views/tools/siteCache'),
+        name: 'siteCache',
+        meta: { title: '缓存清理', icon: 'table' }
+      },
+      {
+        path: 'cdncache',
+        component: () => import('@/views/tools/siteCache'),
+        name: 'cdnCache',
+        meta: { title: 'CDN清理', icon: 'table' }
+      }
+    ]
+  },
+
+  {
     path: '/form',
     component: Layout,
     children: [
