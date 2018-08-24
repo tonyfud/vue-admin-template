@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div class="filter-container" >
+    <div class="filter-container" style="margin-bottom: 20px;">
       <el-tabs type="border-card">
         <el-tab-pane>
           <span slot="label"><i class="el-icon-date"> 单台清理</i></span>
