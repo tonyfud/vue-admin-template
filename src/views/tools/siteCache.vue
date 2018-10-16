@@ -136,14 +136,8 @@ export default {
       })
     },
     listCleanCache() {
-      // const UserX = { 'user': { name }}
-      // const tempData = Object.assign({}, UserX, this.listQuery)
       this.listLoading = true
-      // alert(JSON.stringify(tempData))
-      // console.log(this.listQuery)
       singleCleanCache(this.listQuery).then(response => {
-        // this.list = response.data.data.items
-        // alert(JSON.stringify(response))
         if (response.code === 20000) {
           this.$message({
             message: '清理 ' + this.listQuery + ' 缓存任务提交成功',
@@ -165,18 +159,24 @@ export default {
     },
     checkboxCleanCache() {
       this.listLoading = true
-      // alert(JSON.stringify(this.checkboxGroup1))
       muiltCleanCache(this.checkboxGroup1).then(response => {
-        // this.list = response.data.data.items
-        // alert(JSON.stringify(response.data))
-        this.$notify({
-          title: '成功',
-          message: '清理多个服务器缓存任务提交成功',
-          type: 'success'
-        })
+        if (response.code === 20000) {
+          this.$notify({
+            title: '成功',
+            message: '清理多个服务器缓存任务提交成功',
+            type: 'success'
+          })
+        } else {
+          this.$message({
+            message: '清理多个缓存服务器任务提交失败 err :' + response.data.message,
+            type: 'waring',
+            // center: true,
+            showClose: true
+          })
+        }
+        this.fetchLogData()
+        this.listLoading = false
       })
-      this.fetchLogData()
-      this.listLoading = false
     },
     handleCheckAllChange(val) {
       this.checkboxGroup1 = val ? serverOptions : []
