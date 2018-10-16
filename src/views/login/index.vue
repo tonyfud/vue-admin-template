@@ -1,9 +1,9 @@
 <template>
   <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-      <h3 class="title">Vue Element Admin</h3>
+      <h3 class="title">vue-element-admin</h3>
       <el-form-item prop="username">
-        <span class="svg-container svg-container_login">
+        <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="username" />
@@ -25,13 +25,13 @@
       </el-form-item>
       <el-form-item>
         <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
-          登 录
+          Sign in
         </el-button>
       </el-form-item>
-      <!-- <div class="tips">
+      <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
         <span> password: admin</span>
-      </div> -->
+      </div>
     </el-form>
   </div>
 </template>
@@ -66,7 +66,16 @@ export default {
         password: [{ required: true, trigger: 'blur', validator: validatePass }]
       },
       loading: false,
-      pwdType: 'password'
+      pwdType: 'password',
+      redirect: undefined
+    }
+  },
+  watch: {
+    $route: {
+      handler: function(route) {
+        this.redirect = route.query && route.query.redirect
+      },
+      immediate: true
     }
   },
   methods: {
@@ -83,7 +92,7 @@ export default {
           this.loading = true
           this.$store.dispatch('Login', this.loginForm).then(() => {
             this.loading = false
-            this.$router.push({ path: '/' })
+            this.$router.push({ path: this.redirect || '/' })
           }).catch(() => {
             this.loading = false
           })
@@ -145,6 +154,7 @@ $light_gray:#eee;
     left: 0;
     right: 0;
     width: 380px;
+    max-width: 100%;
     padding: 35px 35px 15px 35px;
     margin: 120px auto;
   }
@@ -164,9 +174,6 @@ $light_gray:#eee;
     vertical-align: middle;
     width: 30px;
     display: inline-block;
-    &_login {
-      font-size: 20px;
-    }
   }
   .title {
     font-size: 26px;
