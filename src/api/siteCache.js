@@ -2,16 +2,16 @@ import request from '@/utils/request'
 
 export function getLog(params) {
   return request({
-    url: 'http://localhost:8080/api/getLog',
+    url: '/api/getLog',
     method: 'GET',
     params: params
   })
 }
 
-export function singleCleanCache(server) {
-  const data = { server }
+export function singleCleanCache(server, user) {
+  const data = { user, server }
   return request({
-    url: 'http://localhost:8080/api/singleCleanCache',
+    url: '/api/singleCleanCache',
     method: 'POST',
     data
   })
@@ -20,7 +20,7 @@ export function singleCleanCache(server) {
 export function muiltCleanCache(servers) {
   const data = { servers }
   return request({
-    url: 'http://localhost:8080/api/muiltCleanCache',
+    url: '/api/muiltCleanCache',
     method: 'POST',
     data
   })

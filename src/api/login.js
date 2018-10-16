@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function login(username, password) {
   return request({
-    url: 'http://localhost:8080/user/login',
+    url: '/user/login',
     method: 'post',
     data: {
       username,
@@ -13,7 +13,7 @@ export function login(username, password) {
 
 export function getInfo(token) {
   return request({
-    url: 'http://localhost:8080/user/info',
+    url: '/user/info',
     method: 'get',
     params: { token }
   })

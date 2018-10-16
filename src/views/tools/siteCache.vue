@@ -133,9 +133,11 @@ export default {
       })
     },
     listCleanCache() {
-      // const tempData = Object.assign({}, this.listQuery)
+      // const UserX = { 'user': { name }}
+      // const tempData = Object.assign({}, UserX, this.listQuery)
       this.listLoading = true
       // alert(JSON.stringify(tempData))
+      // console.log(this.listQuery)
       singleCleanCache(this.listQuery).then(response => {
         // this.list = response.data.data.items
         // alert(JSON.stringify(response))
