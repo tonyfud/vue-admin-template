@@ -69,8 +69,8 @@
       <el-table-column label="动作" align="center" width="120" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <!-- <el-button v-if="scope.row.status=='success'" size="mini" type="success" @click="handleModifyStatus(scope.row,'published')">重做</el-button> -->
-          <el-button v-if="scope.row.status=='error'" size="mini" type="draft" @click="handleModifyStatus(scope.row,'draft')">日志</el-button>
-          <el-button v-if="scope.row.status=='wating'||scope.row.status=='running'" size="mini" type="danger" @click="handleModifyStatus(scope.row,'deleted')">终止</el-button>
+          <el-button v-if="scope.row.status=='Error'" size="mini" type="draft" @click="handleModifyStatus(scope.row,'draft')">日志</el-button>
+          <el-button v-if="scope.row.status=='Wating'||scope.row.status=='Running'" size="mini" type="danger" @click="handleModifyStatus(scope.row,'deleted')">终止</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -96,10 +96,11 @@ export default {
     statusFilter(status) {
       // alert(status)
       const statusMap = {
-        success: 'success',
-        running: 'warning',
-        wating: 'info',
-        error: 'danger'
+        Success: 'success',
+        Running: 'warning',
+        Wating: 'info',
+        Cancel: 'info',
+        Error: 'danger'
       }
       // alert(statusMap[status])
       return statusMap[status]
