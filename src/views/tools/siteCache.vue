@@ -61,14 +61,16 @@
           <span>{{ scope.row.user }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="状态" class-name="status-col" width="100">
+      <el-table-column label="状态" class-name="status-col" width="100" align="center">
         <template slot-scope="scope">
           <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="动作" align="center" width="120" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button size="mini" type="success" @click="handleModifyStatus(scope.row,'published')">日志</el-button>
+          <!-- <el-button v-if="scope.row.status=='success'" size="mini" type="success" @click="handleModifyStatus(scope.row,'published')">重做</el-button> -->
+          <el-button v-if="scope.row.status=='error'" size="mini" type="draft" @click="handleModifyStatus(scope.row,'draft')">日志</el-button>
+          <el-button v-if="scope.row.status=='wating'||scope.row.status=='running'" size="mini" type="danger" @click="handleModifyStatus(scope.row,'deleted')">终止</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -212,7 +214,7 @@ export default {
           message: '所选服务器不能为空'
         })
       } else {
-        this.$confirm('正在清理 [ ' + this.checkboxGroup1 + ' ] 服务器缓存, 是否继续?', '提示', {
+        this.$confirm('正在准备清理多个服务器缓存, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
