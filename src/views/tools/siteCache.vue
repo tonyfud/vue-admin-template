@@ -185,32 +185,46 @@ export default {
       this.isIndeterminate = checkedCount > 0 && checkedCount < this.servers.length
     },
     singleOpenMsgbox() {
-      this.$confirm('正在清理 [ ' + this.listQuery + ' ] 服务器缓存, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.listCleanCache()
-      }).catch(() => {
+      if (this.listQuery.length === 0) {
         this.$message({
-          type: 'info',
-          message: '已取消'
+          type: 'error',
+          message: '所选服务器不能为空'
         })
-      })
+      } else {
+        this.$confirm('正在清理 [ ' + this.listQuery + ' ] 服务器缓存, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.listCleanCache()
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '请求已取消'
+          })
+        })
+      }
     },
     muiltOpenMsgbox() {
-      this.$confirm('正在清理 [ ' + this.checkboxGroup1 + ' ] 服务器缓存, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.checkboxCleanCache()
-      }).catch(() => {
+      if (this.checkboxGroup1.length === 0) {
         this.$message({
-          type: 'info',
-          message: '已取消'
+          type: 'error',
+          message: '所选服务器不能为空'
         })
-      })
+      } else {
+        this.$confirm('正在清理 [ ' + this.checkboxGroup1 + ' ] 服务器缓存, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.checkboxCleanCache()
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '请求已取消'
+          })
+        })
+      }
     }
   }
 }
